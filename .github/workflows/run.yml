@@ -1,39 +1,39 @@
-name: 刷步数
+名字：刷步数: 刷步数
 
-on:
-  schedule:
-    - cron: '39 13 * * *'
-  workflow_dispatch:
+在：:
+  时间表::
+    - cron: '0 0,2,4,6,8,14 * * *'
+  工作流_派送::
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - name: Checkout codes
-        uses: actions/checkout@v5
-        with:
-          token: ${{ secrets.PAT }} #此处PAT需要申请，教程详见：README
-      - name: Update system and install zsh
-        run: |
+工作::
+  构建::
+    运行于: ubuntu-latest: ubuntu-latest
+    超时分钟数：60: 60
+    步骤：:
+      - 名称：结账代码name: Checkout codes
+        用途：actions/checkout@v5: actions/checkout@v5
+        与：:
+          token: ${{ secrets.PAT }} #此处PAT需要申请，教程详见：README: ${{ secrets.PAT }} #此处PAT需要申请，教程详见：README
+      - name: 更新系统并安装 zshname: Update system and install zsh
+        运行：|: |
           sudo -E apt-get -qq update
           sudo -E apt-get install zsh -y
           
-      - name: 初始化Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.10"
+      - name: 初始化Pythonname: 初始化Python
+        用途：actions/setup-python@v6: actions/setup-python@v6
+        与：:
+          python-version: "3.10": "3.10"
           
-      - name: 开始
-        env:
-            CONFIG: ${{ secrets.CONFIG }}
-            AES_KEY: ${{ secrets.AES_KEY }}
-        run: |
-          pip3 install requests pytz pycryptodome
+      - name: 开始name: 开始
+        环境::
+            配置：${{ secrets.CONFIG }}: ${{ secrets.CONFIG }}
+            AES_KEY: ${{ secrets.AES_KEY }}: ${{ secrets.AES_KEY }}
+        运行：|: |
+          使用pip3安装requests、pytz和pycryptodome。
           python3 main.py
 
-      - name: persist tokens
-        run: |
+      - 名称: 持久化令牌name: persist tokens
+        运行：|: |
           git config user.name github-actions
           git config user.email github-actions@users.noreply.github.com
           git add .
